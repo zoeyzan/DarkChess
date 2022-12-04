@@ -2,15 +2,19 @@ package controller;
 
 
 import chessComponent.CannonChessComponent;
+import chessComponent.ChessComponent;
 import chessComponent.SquareComponent;
 import chessComponent.EmptySlotComponent;
 import model.ChessColor;
 import view.ChessGameFrame;
 import view.Chessboard;
 
+import java.awt.*;
+
 public class ClickController {
     private final Chessboard chessboard;
     private SquareComponent first;
+    protected int RedPoint,BlackPoint;
 
     public ClickController(Chessboard chessboard) {
         this.chessboard = chessboard;
@@ -34,8 +38,12 @@ public class ClickController {
                 //repaint in swap chess method.
                 chessboard.swapChessComponents(first, squareComponent);
                 chessboard.clickController.swapPlayer();
+                if(chessboard.getCurrentColor().getName()=="Black")
+                    BlackPoint+= ((ChessComponent)squareComponent).getPoints();
+                if(chessboard.getCurrentColor().getName()=="Red")
+                    RedPoint+=((ChessComponent)squareComponent).getPoints();
 
-                first.setSelected(false);
+                    first.setSelected(false);
                 first = null;
             }
         }
@@ -69,8 +77,6 @@ public class ClickController {
 
         if (!squareComponent.isReversal()) {
             //没翻开且非空棋子不能走
-//            if((Math.abs(squareComponent.getChessboardPoint().getY()- first.getY())==2&&Math.abs(squareComponent.getChessboardPoint().getX()- first.getX())==0)||
-//                    Math.abs(squareComponent.getChessboardPoint().getY()- first.getY())==2&&Math.abs(squareComponent.getChessboardPoint().getX()- first.getX())==0))
             if(first instanceof CannonChessComponent&&!(squareComponent instanceof EmptySlotComponent))
                 return first.canMoveTo(chessboard.getChessComponents(), squareComponent.getChessboardPoint());
             if (!(squareComponent instanceof EmptySlotComponent)) {

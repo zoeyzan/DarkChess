@@ -19,7 +19,7 @@ public class ChessGameFrame extends JFrame {
     private static JLabel statusLabel;
 
     public ChessGameFrame(int width, int height) {
-        setTitle("2022 CS109 Project Demo"); //设置标题
+        setTitle("2022 CS109 Project DarkChess"); //设置标题
         this.WIDTH = width;
         this.HEIGHT = height;
         this.CHESSBOARD_SIZE = HEIGHT * 4 / 5;
